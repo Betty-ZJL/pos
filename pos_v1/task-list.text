@@ -1,0 +1,72 @@
+#1 printReceipt()
+
+
+#2 转换标签格式 tagsFormat()
+**输入**
+  tags=[String]
+**输出**
+  tagsInfo:[{
+      barcode:String,
+      count:float}]
+
+#3 计算数量 itemsCount()
+**输入**
+  tagsInfo
+**输出**
+  itemsPurchaseInfo:[{
+      barcode:String,
+      count:float}]
+
+#4 转换购买商品格式 itemsFormat()
+**输入**：
+  itemsPurchaseInfo
+  allItems:[{
+      barcode:String,
+      name:String,
+      un   it:String,
+      price:float
+  }]:loadAllItems()
+**输出**
+  itemsPurchaseInfo:[{
+      barcode: String,
+      count:float,
+      name:String,
+      unit:String,
+      price:float
+  }]
+
+#5 计算小计 itemsTotalCount()
+**输入**
+  itemsPurchaseInfo
+  Promotions:[{
+      type:String,
+      barcodes:[String]
+  }]：loadPromotions()
+**输出**
+  itemsPurchaseInfo:[{
+      barcode: String,
+      count:float,
+      name:String,
+      unit:String,
+      price:float,
+      totalPro:float
+  }]
+
+#6 计算总计，节省  itemsSummary()
+**输入**
+  itemsPurchaseInfo 
+**输出**
+  summary:{
+      totalPro:float,
+      totalSave:float
+  }
+  
+#7 转换收据格式 toReceipt()
+**输入**
+  itemsPurchaseInfo 
+  summary
+**输出**
+  receipt:String：consol.log()
+
+
+
