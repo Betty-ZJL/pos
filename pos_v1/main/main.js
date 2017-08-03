@@ -2,8 +2,8 @@
 
 // 转换标签格式
 function tagsFormat(tags) {
-  var n;
-  var tagsInfo = [];
+  let n;
+  let tagsInfo = [];
   for (let tag of tags) {
     if (tag.includes('-')) {
       n = parseFloat(tag.substring(tag.indexOf('-') + 1));
@@ -17,7 +17,7 @@ function tagsFormat(tags) {
 
 //计算数量
 function itemsCount(tagsInfo){
-  var itemsPurchaseInfo=[];
+  let itemsPurchaseInfo=[];
   for(let tag of tagsInfo){
     let flag=1;
     for(let item of itemsPurchaseInfo){
@@ -35,7 +35,7 @@ function itemsCount(tagsInfo){
 
 //转换购买商品格式
 function itemsFormat(itemsPurchaseInfo){
-  var allItems=loadAllItems();
+  let allItems=loadAllItems();
   for(let item of itemsPurchaseInfo){
     for(let aitem of allItems){
       while(item.barcode==aitem.barcode){
@@ -50,7 +50,7 @@ function itemsFormat(itemsPurchaseInfo){
 }
 // 计算小计
 function itemsTotalCount(itemPurchaseInfo) {
-  var Promotion=loadPromotions();
+  let Promotion=loadPromotions();
   for (let item of itemPurchaseInfo){
     if(Promotion[0].barcodes.includes(item.barcode)&&item.count>=2)
       item.totalPro=item.price*(item.count-1);
@@ -62,7 +62,7 @@ function itemsTotalCount(itemPurchaseInfo) {
 
 // 计算总计，节省
 function itemsSummary(itemPurchaseInfo){
-  var summary={totalPro:0,totalSave:0};
+  let summary={totalPro:0,totalSave:0};
   for (let item of itemPurchaseInfo){
     summary.totalPro+=item.totalPro;
     summary.totalSave+=item.count*item.price-item.totalPro;
@@ -72,7 +72,7 @@ function itemsSummary(itemPurchaseInfo){
 
 //转换成收据格式
 function toReceipt(itemsPurchaseInfo,summary) {
-  var receipt='***<没钱赚商店>收据***\n';
+  let receipt='***<没钱赚商店>收据***\n';
   for(let item of itemsPurchaseInfo){
     receipt+=`名称：${item.name}，数量：${item.count}${item.unit}，单价：${item.price.toFixed(2)}(元)，小计：${item.totalPro.toFixed(2)}(元)\n`;
   }
@@ -81,12 +81,12 @@ function toReceipt(itemsPurchaseInfo,summary) {
 }
 
 function printReceipt(tags) {
-  var tagsInfo=tagsFormat(tags);
-  var itemsPurchaseInfo=itemsCount(tagsInfo);
+  let tagsInfo=tagsFormat(tags);
+  let itemsPurchaseInfo=itemsCount(tagsInfo);
   itemsPurchaseInfo=itemsFormat(itemsPurchaseInfo);
   itemsPurchaseInfo=itemsTotalCount(itemsPurchaseInfo);
-  var summary=itemsSummary(itemsPurchaseInfo);
-  var receipt=toReceipt(itemsPurchaseInfo,summary);
+  let summary=itemsSummary(itemsPurchaseInfo);
+  let receipt=toReceipt(itemsPurchaseInfo,summary);
   console.log(receipt);
 }
 
